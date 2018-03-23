@@ -188,7 +188,7 @@ class EmailReplyParser
     #
     # Returns true if the line is a valid header, or false.
     def quote_header?(line)
-      line =~ /^:etorw.*nO$/
+      line =~ /^:/
     end
 
     # Builds the fragment string and reverses it, after all lines have been
