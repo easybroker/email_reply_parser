@@ -54,6 +54,7 @@ class EmailReplyParser
 
   # An Email instance represents a parsed body String.
   class Email
+    MULTILINE_HEADER_REGEX = /^(?!(On.*On\s.+?wrote:|El.*El\s.+?escribió:))(On\s(.+?)wrote:|El\s(.+?)escribió:)$/m
     # Emails have an Array of Fragments.
     attr_reader :fragments
 
@@ -83,9 +84,9 @@ class EmailReplyParser
 
       # Check for multi-line reply headers. Some clients break up
       # the "On DATE, NAME <EMAIL> wrote:" line into multiple lines.
-      if text =~ /^(?!On.*On\s.+?wrote:)(On\s(.+?)wrote:)$|^(?!El.*El\s.+?escribió:)(El\s(.+?)escribió:)$/m
+      if text =~ MULTILINE_HEADER_REGEX
         # Remove all new lines from the reply header.
-        text.gsub! [$1, $3].compact.join, [$1, $3].compact.join.gsub("\n", " ")
+        text.gsub! $2, $2.gsub("\n", " ")
       end
 
       # Some users may reply directly above a line of underscores.
