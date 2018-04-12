@@ -54,7 +54,8 @@ class EmailReplyParser
 
   # An Email instance represents a parsed body String.
   class Email
-    MULTILINE_HEADER_REGEX = /^(?!(On.*On\s.+?wrote:|El.*El\s.+?escribió:))(On\s(.+?)wrote:|El\s(.+?)escribió:)$/m
+    MULTILINE_HEADER_REGEX = /(?!(On.*On\s.+?wrote:|El.*El\s.+?escribi.:))(On\s(.+?)wrote:|El\s(.+?)escribi.:)$/m
+
     # Emails have an Array of Fragments.
     attr_reader :fragments
 
