@@ -54,8 +54,8 @@ class EmailReplyParser
 
   # An Email instance represents a parsed body String.
   class Email
-    MULTILINE_HEADER_REGEX_ENG = /^(On\s(.+?)wrote:)$/m
-    MULTILINE_HEADER_REGEX_ESP = /^(El\s(.+?)escribi.:)$/m
+    MULTILINE_HEADER_REGEX_ENG = /^(?!On.*On\s.+?wrote:)(On\s(.+?)wrote:)$/m
+    MULTILINE_HEADER_REGEX_ESP = /^(El\s(.+?)escribió:)$/m
 
     # Emails have an Array of Fragments.
     attr_reader :fragments
@@ -191,7 +191,9 @@ class EmailReplyParser
     #
     # Returns true if the line is a valid header, or false.
     def quote_header?(line)
-      line =~ /^:/
+      line =~ /^:etorw.*nO$/ ||
+        line =~ /^.*:(morF|tneS|oT|tcejbuS)$/ ||
+        line =~ /^:óibircse.*lE$/
     end
 
     # Builds the fragment string and reverses it, after all lines have been

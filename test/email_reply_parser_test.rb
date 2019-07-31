@@ -222,6 +222,16 @@ I am currently using the Java HTTP API.\n", reply.fragments[0].to_s
     assert_equal 1, reply.fragments.size
   end
 
+  def test_in_spanish
+    reply = email(:email_spanish)
+    assert_equal "2da prueba.", reply.fragments.first.to_s
+  end
+
+  def test_in_spanish_greedy
+    skip
+    reply = email(:email_spanish_greedy)
+  end
+
   def email(name)
     body = IO.read EMAIL_FIXTURE_PATH.join("#{name}.txt").to_s
     EmailReplyParser.read body
